@@ -1,6 +1,8 @@
 function AppNav(props) {
     return (
-        <div></div>
+        <div>
+            Appnav
+        </div>
     )
 }
 

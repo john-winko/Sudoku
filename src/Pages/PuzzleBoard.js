@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import data from '../api/getData'
 import SudokuBoard from "../components/SudokuBoard";
 import SelectBoard from "../components/SelectBoard";
-import Menu from "../components/Menu";
+import Menu from "./Menu";
 
 function PuzzleBoard() {
 

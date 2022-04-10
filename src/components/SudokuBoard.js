@@ -23,6 +23,11 @@ function SudokuBoard(props) {
     }
 
     const renderBoard = () => {
+        // console.log(props.board)
+        // const test = props.board.map((element, index)=>{
+        //     return <span>element.cell_id</span>
+        // })
+        // return test
         const newBoard = props.board.map((element, index) => {
             return (<SudokuCell key={index} {...element}
                                 show={props.showCandidates}
@@ -44,7 +49,8 @@ function SudokuBoard(props) {
     return (
         <div className={"board"}>
             {props.hint && console.log(props.hint)}
-            {renderBoard()}
+            {props.board && renderBoard()}
+            {/*{console.log(props.board)}*/}
         </div>
     )
 }

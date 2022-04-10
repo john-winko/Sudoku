@@ -1,8 +1,8 @@
-from random import random
+import random
 
 from .Logic.sample_data import boards_dict
 from .models import SudokuBoard as SudokuBoardModel, SudokuCell as SudokuCellModel
-from .Logic import SudokuBoard
+from .Logic.SudokuBoard import SudokuBoard
 
 
 def encode_cell(data):

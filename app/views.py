@@ -34,6 +34,7 @@ def log_in(request):
         except Exception as e:
             print(str(e))
         # Don't send everything from user, only what app needs to use for state
+        # return HttpResponse('success!')
         return JsonResponse({"username": user.username})
     else:
         return HttpResponse('no user!')

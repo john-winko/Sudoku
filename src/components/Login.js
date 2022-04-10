@@ -1,23 +1,28 @@
 import {useEffect, useState} from "react";
 import utils from "../utils/utils";
 import {Button, Form, FormControl} from "react-bootstrap";
+import axios from "axios";
 
 function Login(props) {
 
     const logout = () => {
-        // TODO send logout to api
-        props.setUser(null)
+        utils.logOut()
+            .then(() => props.setUser(null))
+
     }
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault()
-        let username = evt.target.elements.username.value
-        let password = evt.target.elements.password.value
-        utils.logIn(username, password, props.setUser)
-        // props.setUser(username)
-        // console.log("usernam", username)
-        // console.log("pass", password)
-        // // utils.logIn(username, password, setUser)
+        let params = {
+            "username": evt.target.elements.username.value,
+            "password": evt.target.elements.password.value
+        }
+        // MUST do this independently to avoid csrf issues with authenticated requests
+        axios.post('/login/', params)
+            .then((response) => {
+                // console.log("login data", response.data)
+                props.setUser(response.data.username)
+        })
     }
 
     const showLogin = () => {
@@ -53,7 +58,7 @@ function Login(props) {
 
     return (
         <>
-            {props.user ?  showLogout(): showLogin()}
+            {props.user ? showLogout() : showLogin()}
         </>
 
     )

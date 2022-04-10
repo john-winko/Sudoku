@@ -1,9 +1,22 @@
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.decorators import api_view
+from rest_framework.viewsets import ModelViewSet
+from .mediator import create_game
+from .models import SudokuBoard, SudokuCell
+from .serializers import SudokuCellSerializer, SudokuBoardSerializer
 
 
-# Create your views here.
+class PuzzleViewSet(ModelViewSet):
+    queryset = SudokuBoard.objects.all()
+    serializer_class = SudokuBoardSerializer
+
+
+class CellViewSet(ModelViewSet):
+    queryset = SudokuCell.objects.all()
+    serializer_class = SudokuCellSerializer
+
+
 def send_the_homepage(request):
     react_index = open('build/index.html').read()
     return HttpResponse(react_index)
@@ -37,3 +50,9 @@ def who_am_i(request):
 def log_out(request):
     logout(request)
     return HttpResponse('Logged you out!')
+
+
+@api_view(['GET'])
+def start_game(request):
+    board = create_game(request.GET['board'] if 'board' in request.GET else None)
+    return JsonResponse(SudokuBoardSerializer(board).data)

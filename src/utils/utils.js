@@ -2,7 +2,7 @@ import axios from "axios"
 
 const myexports = {}
 
-const getCSRFToken = () => {
+myexports.getCSRFToken = () => {
     let csrfToken
 
     // the browser's cookies for this page are all in one string, separated by semi-colons
@@ -16,35 +16,31 @@ const getCSRFToken = () => {
     }
     return csrfToken
 }
-axios.defaults.headers.common['X-CSRFToken'] = getCSRFToken()
+// axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
 
-// csrf token is set
-// myexports.logIn = (username, password, setUser) => {
-//   let params = {
-//     "username" : username,
-//     "password" : password
-//   }
-//   axios.post('/login/', params).then((response)=>{
-//     if (response.data.username){
-//       setUser(response.data.username)
-//     }
-//   })
-// }
 
 myexports.logOut = async () => {
+    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
     await axios.post("/logout/")
-        .then((response) => console.log("Logout", response))
-
+        // .then((response) => console.log("Logout", response))
 }
 
 myexports.whoAmI = async () => {
+    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
     const response = await axios.get("/whoami/")
     // console.log("whoami", response.data)
     return response.data
 }
 
 myexports.startGame = async () => {
-    const response = await  axios.get("/start_game/")
+    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
+    const response = await axios.get("/start_game/")
+    return response
+}
+
+myexports.test = async () => {
+    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
+    const response = await axios.post("/test/")
     return response
 }
 export default myexports;

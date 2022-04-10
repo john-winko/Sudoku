@@ -1,5 +1,4 @@
-import {Button, Container, Form, FormControl, Nav, Navbar} from "react-bootstrap";
-import utils from "../utils/utils";
+import {Container, Nav, Navbar} from "react-bootstrap";
 import Login from "../components/Login";
 
 function AppNav(props) {
@@ -13,10 +12,10 @@ function AppNav(props) {
                     style={{maxHeight: '100px'}}
                     navbarScroll
                 >
-                    {/*TODO: leaderboards*/}
-                    {/*TODO: If logged in, link for history/progress*/}
-                    {/*<Nav.Link href="#action1">Home</Nav.Link>*/}
-                    {/*<Nav.Link href="#action2">Link</Nav.Link>*/}
+                    {/*TODO: implement*/}
+                    <Nav.Link href="#action1">Start new game</Nav.Link>
+                    <Nav.Link href="#action2">Leaderboards</Nav.Link>
+                    {props.user && <Nav.Link href="#action3">Game History</Nav.Link>}
                     {/*<Nav.Link href="#" disabled>Link</Nav.Link>*/}
                 </Nav>
                 <Login user={props.user} setUser={props.setUser}/>

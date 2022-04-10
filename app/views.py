@@ -53,7 +53,14 @@ def log_out(request):
     return HttpResponse('Logged you out!')
 
 
+@api_view(['POST', 'GET'])
+def test(request):
+    print(request)
+    return HttpResponse("Tested")
+
+
 @api_view(['GET'])
 def start_game(request):
+    # TODO add user capture if logged in
     board = create_game(request.GET['board'] if 'board' in request.GET else None)
     return JsonResponse(SudokuBoardSerializer(board).data)

@@ -8,5 +8,6 @@ urlpatterns = [
     path('whoami/', views.who_am_i),
     path('logout/', views.log_out),
 
-    path('start_game/', views.start_game)
+    path('start_game/', views.start_game),
+    path('test/', views.test)
 ]

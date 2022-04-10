@@ -10,6 +10,7 @@ function App() {
     utils.whoAmI()
   },[user])
 
+  // useRef for inputs?
   const handleFormSubmit = (evt) => {
     evt.preventDefault()
     let username = evt.target.elements.username.value

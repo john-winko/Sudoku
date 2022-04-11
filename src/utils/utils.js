@@ -16,41 +16,31 @@ myexports.getCSRFToken = () => {
     }
     return csrfToken
 }
-// axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
 
-
-myexports.logOut = async () => {
+const apiGet = (url, params=null) =>{
     axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
-    await axios.post("/logout/")
-        // .then((response) => console.log("Logout", response))
+        if (params)
+        return axios.get(url, params)
+    return axios.get(url)
 }
 
-myexports.whoAmI = async () => {
+const apiPost =  (url, params=null)=>{
     axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
-    const response = await axios.get("/whoami/")
-    // console.log("whoami", response.data)
-    return response.data
+    if (params)
+        return axios.post(url, params)
+    return axios.post(url)
 }
 
-myexports.startGame = async () => {
-    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
-    const response = await axios.get("/start_game/")
-    return response
-}
-
-myexports.test = async () => {
-    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
-    const response = await axios.post("/test/")
-    return response
-}
+myexports.logOut = async () => await apiPost("/logout/")
+myexports.whoAmI = async () => await apiGet("/whoami/")
+myexports.startGame = async () => await apiGet("/start_game/")
+myexports.test = async () => await apiPost("/test/")
 
 myexports.getHint = async (board) => {
     let boardString = board.cells.map((element, index)=>{
         return (element.value)
     }).join("")
-    console.log(boardString)
-    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
-    const response = await axios.post("/get_hint/", {"boardString": boardString})
-    return response
+    return await apiPost("/get_hint/", {"boardString": boardString})
 }
+
 export default myexports;

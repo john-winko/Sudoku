@@ -16,7 +16,6 @@ function AppNav(props) {
                     <Nav.Link href="#action1">Start new game</Nav.Link>
                     <Nav.Link href="#action2">Leaderboards</Nav.Link>
                     {props.user && <Nav.Link href="#action3">Game History</Nav.Link>}
-                    {/*<Nav.Link href="#" disabled>Link</Nav.Link>*/}
                 </Nav>
                 <Login user={props.user} setUser={props.setUser}/>
             </Container>

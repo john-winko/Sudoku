@@ -1,22 +1,25 @@
 
-.bLeft{
+.bLeft {
     /*TODO how to use this without important?*/
-    border-left-width: 1px!important;
+    border-left-width: 1px !important;
 }
-.bbLeft{
-    border-left-width: 3px!important;
+
+.bbLeft {
+    border-left-width: 3px !important;
 }
-.bTop{
+
+.bTop {
     /*TODO how to use this without important?*/
-    border-top-width: 1px!important;
+    border-top-width: 1px !important;
 }
-.bbTop{
-    border-top-width: 3px!important;
+
+.bbTop {
+    border-top-width: 3px !important;
 }
-.gridCell{
-    width:57px;
+
+.gridCell {
+    width: 57px;
     height: 57px;
-    /*background-color: #ceeaf1;*/
     float: left;
     border-color: darkblue;
     border-style: solid;
@@ -24,23 +27,28 @@
     font-weight: bolder;
     font-size: 30pt;
 }
+
 .clear {
     clear: both;
 }
-.selectedCell{
+
+.selectedCell {
     background-color: lightgreen;
 }
-.hintCell{
+
+.hintCell {
     background-color: yellow;
 }
-.gridCellValue{
+
+.gridCellValue {
     display: flex;
     align-items: center;
     justify-content: center;
     float: none;
 }
+
 .gridCellCandidate {
-    width:18px;
+    width: 18px;
     height: 18px;
     float: left;
     font-size: 10pt;
@@ -48,6 +56,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .hide {
     display: none;
     /*opacity: 0;*/
@@ -55,9 +64,9 @@
 
 .hint {
     box-shadow: #e30c0c 0px 0px 0px 1px inset;
-    /*border-style: solid;*/
     border-radius: 50%;
 }
+
 .eliminate {
     box-shadow: #1033c2 0px 0px 0px 1px inset;
     border-radius: 50%;

@@ -4,6 +4,8 @@
 # Working
 - Front end
 - Login / session state
+- Start with a blank board, only create new game when asked
+- 
 
 
 # Backlog

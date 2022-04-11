@@ -1,12 +1,11 @@
 import '../App.css';
-// import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import {useEffect, useState} from "react";
 import data from '../api/getData'
 import SudokuBoard from "../components/SudokuBoard";
 import SelectBoard from "../components/SelectBoard";
 import Menu from "./Menu";
 
-function PuzzleBoard() {
+function PuzzleBoard(props) {
 
     const [board, setBoard] = useState([])
     const [boardString, setBoardString] = useState("3..2........1.7...7.6.3.5...7...9.8.9...2...4.1.8...5...9.4.3.1...7.2........8..6")
@@ -14,12 +13,9 @@ function PuzzleBoard() {
     const [hint, setHint] = useState(null)
 
     useEffect(() => {
-        const loadBoard = async () => {
-            const boardData = await data.getBoard(boardString)
-            setBoard(boardData.data.cells)
-        }
-        loadBoard().then() // added .then cause linter was complaining about unfulfilled promise
-    }, [boardString])
+        setBoard(props.board.cells)
+        setBoardString(props.board.board_string)
+    }, [props.board])
 
     const removeCandidate = (data) => {
         let cellID = data.substring(0,2)
@@ -40,25 +36,12 @@ function PuzzleBoard() {
     }
 
     return (
-        <div className="App">
-            <h1>Sudoku App</h1>
-            <SelectBoard setBoardString={setBoardString} />
-            <hr/>
-            <div className={"boardContainer"}>
-                <SudokuBoard {...{board, showCandidates, removeCandidate, hint}} />
-                <Menu {...{showCandidates, setHint, boardString}} toggleCandidates={()=>setShowCandidates(!showCandidates)} />
-            </div>
-
+        <div className={"boardContainer"}>
+            {/*{console.log("puzzle board data", props.board.cells)}*/}
+            <SudokuBoard board={props.board.cells} {...{board, showCandidates, removeCandidate, hint}} />
+            {/*<Menu {...{showCandidates, setHint, boardString}} toggleCandidates={()=>setShowCandidates(!showCandidates)} />*/}
         </div>
     );
-    // return (
-    //     <Router>
-    //         <Routes>
-    //             <Route path="/" element={<PuzzleBoard/>}></Route>
-    //         </Routes>
-    //
-    //     </Router>
-    // );
 }
 
 export default PuzzleBoard;

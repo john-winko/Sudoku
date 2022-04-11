@@ -2,19 +2,19 @@
 /*  text-align: center;*/
 /*}*/
 
-/*.board {*/
-/*  float: left;*/
-/*  box-sizing:content-box;*/
-/*  border-color: darkblue;*/
-/*  border-style: solid;*/
-/*  border-width: 3px;*/
-/*}*/
-/*.boardContainer{*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*  margin: 2rem;*/
-/*}*/
-/*.clear {*/
-/*  clear: both;*/
-/*}*/
+.board {
+  float: left;
+  box-sizing:content-box;
+  border-color: darkblue;
+  border-style: solid;
+  border-width: 3px;
+}
+.boardContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+}
+.clear {
+  clear: both;
+}

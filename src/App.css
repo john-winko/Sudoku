@@ -2,6 +2,13 @@
 /*  text-align: center;*/
 /*}*/
 
+.boardContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .board {
   float: left;
   box-sizing:content-box;
@@ -9,12 +16,7 @@
   border-style: solid;
   border-width: 3px;
 }
-.boardContainer{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem;
-}
+
 .clear {
   clear: both;
 }

@@ -47,11 +47,14 @@ function SudokuBoard(props) {
     }
 
     return (
-        <div className={"board"}>
+        <div className={"boardContainer"}>
+            <div className={"board"}>
             {props.hint && console.log(props.hint)}
             {props.board && renderBoard()}
             {/*{console.log(props.board)}*/}
         </div>
+        </div>
+
     )
 }
 

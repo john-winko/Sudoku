@@ -8,13 +8,13 @@ import Menu from "./Menu";
 function PuzzleBoard(props) {
 
     const [board, setBoard] = useState([])
-    const [boardString, setBoardString] = useState("3..2........1.7...7.6.3.5...7...9.8.9...2...4.1.8...5...9.4.3.1...7.2........8..6")
-    const [showCandidates, setShowCandidates] = useState(false)
+    // const [boardString, setBoardString] = useState("3..2........1.7...7.6.3.5...7...9.8.9...2...4.1.8...5...9.4.3.1...7.2........8..6")
+    // const [showCandidates, setShowCandidates] = useState(false)
     const [hint, setHint] = useState(null)
 
     useEffect(() => {
         setBoard(props.board.cells)
-        setBoardString(props.board.board_string)
+        // setBoardString(props.board.board_string)
     }, [props.board])
 
     const removeCandidate = (data) => {

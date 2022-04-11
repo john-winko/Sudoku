@@ -62,5 +62,5 @@ def test(request):
 @api_view(['GET'])
 def start_game(request):
     # TODO add user capture if logged in
-    board = create_game(request.GET['board'] if 'board' in request.GET else None)
+    board = create_game(request.GET['board'] if 'board' in request.GET else None, request.user)
     return JsonResponse(SudokuBoardSerializer(board).data)

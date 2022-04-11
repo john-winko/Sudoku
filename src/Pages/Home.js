@@ -11,7 +11,6 @@ function Home(props) {
     const [showCandidates, setShowCandidates] = useState(false)
 
     useEffect(() => {
-        // utils.whoAmI().then((data)=>console.log("useEffect",data))
         console.log("user", user)
         if (user) {
             utils.startGame().then((response) => {

@@ -10,27 +10,29 @@ function Board(props) {
 
     // TODO need to rename to selection rather than click... can be done either through click or by showing hints
     const cellClick = (data, force = false) => {
-        if (selectedCell === data.substring(0, 2)) {
+        let cellID = data.substring(0, 2)
+        if (selectedCell === cellID) {
             // already selected
             if (props.showCandidates) {
                 // handle candidate clicks
-                props.removeCandidate(data)
+                // props.removeCandidate(data)
             } else {
                 // unclick
                 setSelectedCell(null)
             }
         } else {
-            setSelectedCell(data.substring(0, 2))
+            setSelectedCell(cellID)
         }
     }
 
     const renderBoard = () => {
         const newBoard = props.board.cells.map((element, index) => {
-            return (<Cell key={index} {...element}
-                                showCandidates={props.showCandidates}
-                                cellClick={cellClick}
-                                selectedCell={selectedCell === element.cell_id}
-                          setSelectedCell={setSelectedCell}
+            return (<Cell key={index}
+                          {...element}
+                          showCandidates={props.showCandidates}
+                          cellClick={cellClick}
+                          selectedCell={selectedCell === element.cell_id}
+
             />)
         })
 

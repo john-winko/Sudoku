@@ -11,11 +11,12 @@ function Cell(props) {
         bbLeft: bigLeft.includes(props.column),
         bTop: smallLeft.includes(props.row),
         bbTop: bigLeft.includes(props.row),
+        selectedCell: props.selectedCell
     })
 
     let handleClick = (e) => {
         e.stopPropagation() // since the candidates are nested
-        // props.cellClick(e.target.id)
+        props.cellClick(e.target.id)
     }
 
     const renderHints = () => {
@@ -48,7 +49,7 @@ function Cell(props) {
     }
 
     return (
-        <div className={gridCellClass} id={props.cell_id}>
+        <div onClick={handleClick} className={gridCellClass} id={props.cell_id}>
             {renderCell()}
         </div>
     )

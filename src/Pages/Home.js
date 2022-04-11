@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import utils from "../utils/utils";
 import defaultBoard from "../api/blankBoard";
 import {Button, Col, Container, Row} from "react-bootstrap";
-import PuzzleBoard from "./PuzzleBoard";
+import Board from "../components/Board";
 
 function Home(props) {
     const [user, setUser] = useState(null)
@@ -11,7 +11,6 @@ function Home(props) {
     const [showCandidates, setShowCandidates] = useState(false)
 
     useEffect(() => {
-        // utils.whoAmI().then((data)=>console.log("useEffect",data))
         console.log("user", user)
         if (user) {
             utils.startGame().then((response) => {
@@ -25,14 +24,19 @@ function Home(props) {
     return (
         <div>
             <AppNav user={user} setUser={setUser}/>
-            <Row>
+            <Row className={"mt-2 mx-2"}>
                 <Col>
-                    <Button onClick={()=>setShowCandidates(!showCandidates)}>
-                        {showCandidates ? "Show" : "Hide"}
+                    <hr/>
+                    <Button className={"w-100"} onClick={()=>setShowCandidates(!showCandidates)}>
+                        {showCandidates ? "Hide " : "Show "}
                         Candidates</Button>
+                    <hr/>
+                    <Button className={"w-100"}>Generate candidates</Button>
+                    <hr/>
+                    <Button className={"w-100"}>Get Hint</Button>
                 </Col>
-                <Col xs={12} md={8}>
-                    <Container><PuzzleBoard {...{board, showCandidates}}/></Container>
+                <Col xs={12} lg={8}>
+                    <Container><Board {...{board, showCandidates, setBoard}}/></Container>
                 </Col>
                 <Col>Solution hints</Col>
             </Row>

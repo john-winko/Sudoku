@@ -14,8 +14,8 @@
     border-top-width: 3px!important;
 }
 .gridCell{
-    width:60px;
-    height: 60px;
+    width:57px;
+    height: 57px;
     /*background-color: #ceeaf1;*/
     float: left;
     border-color: darkblue;
@@ -37,8 +37,8 @@
     float: none;
 }
 .gridCellCandidate {
-    width:20px;
-    height: 20px;
+    width:18px;
+    height: 18px;
     float: left;
     font-size: 10pt;
     display: flex;

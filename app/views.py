@@ -2,7 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.decorators import api_view
 from rest_framework.viewsets import ModelViewSet
-from .mediator import create_game
+from .mediator import create_game, get_hint
 from .models import SudokuBoard
 from .serializers import SudokuBoardSerializer
 
@@ -55,8 +55,10 @@ def log_out(request):
 
 @api_view(['POST', 'GET'])
 def test(request):
-    print(request)
-    return HttpResponse("Tested")
+    if 'boardString' in request.data:
+        hint = get_hint(request.data['boardString'])
+        return JsonResponse(hint)
+    return HttpResponse("failed")
 
 
 @api_view(['GET'])
@@ -64,3 +66,4 @@ def start_game(request):
     # TODO add user capture if logged in
     board = create_game(request.GET['board'] if 'board' in request.GET else None, request.user)
     return JsonResponse(SudokuBoardSerializer(board).data)
+

@@ -43,4 +43,13 @@ myexports.test = async () => {
     const response = await axios.post("/test/")
     return response
 }
+
+myexports.getHint = async (board) => {
+    let boardString = board.cells.map((element, index)=>{
+        return (element.value)
+    }).join("")
+    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
+    const response = await axios.post("/test/", {"boardString": boardString})
+    return response
+}
 export default myexports;

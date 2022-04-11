@@ -10,6 +10,7 @@ function Home(props) {
     const [board, setBoard] = useState(defaultBoard)
     const [showCandidates, setShowCandidates] = useState(false)
 
+
     useEffect(() => {
         console.log("user", user)
         if (user) {
@@ -20,6 +21,10 @@ function Home(props) {
         }
     }, [user])
 
+    const getHint = async () => {
+        let response = await utils.getHint(board)
+        console.log(response)
+    }
 
     return (
         <div>
@@ -31,9 +36,10 @@ function Home(props) {
                         {showCandidates ? "Hide " : "Show "}
                         Candidates</Button>
                     <hr/>
+                    {/*TODO: Logged in functionality*/}
                     <Button className={"w-100"}>Generate candidates</Button>
                     <hr/>
-                    <Button className={"w-100"}>Get Hint</Button>
+                    <Button className={"w-100"} onClick={getHint}>Get Hint</Button>
                 </Col>
                 <Col xs={12} lg={8}>
                     <Container><Board {...{board, showCandidates, setBoard}}/></Container>

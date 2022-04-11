@@ -7,6 +7,7 @@ function Board(props) {
 
     const [selectedCell, setSelectedCell] = useState(null)
 
+
     function handleKeyDown(e) {
         if (!selectedCell) return
 
@@ -22,6 +23,8 @@ function Board(props) {
             }
         }
         props.setBoard(newboard)
+        // remove hint when value entered
+        props.setHint(null)
     }
 
     // only allow edits to solved value via keyboard
@@ -71,6 +74,7 @@ function Board(props) {
                           showCandidates={props.showCandidates}
                           cellClick={cellClick}
                           selectedCell={selectedCell === element.cell_id}
+                          hint={props.hint}
 
             />)
         })
@@ -86,6 +90,7 @@ function Board(props) {
 
     return (
         <div className={"boardContainer"}>
+            {console.log("current hint: ", props.hint)}
             <div className={"board"}>
                 {props.board && renderBoard()}
             </div>

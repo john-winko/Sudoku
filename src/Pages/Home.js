@@ -9,7 +9,7 @@ function Home(props) {
     const [user, setUser] = useState(null)
     const [board, setBoard] = useState(defaultBoard)
     const [showCandidates, setShowCandidates] = useState(false)
-
+    const [hint, setHint] = useState(null)
 
     useEffect(() => {
         console.log("user", user)
@@ -23,7 +23,8 @@ function Home(props) {
 
     const getHint = async () => {
         let response = await utils.getHint(board)
-        console.log(response)
+        setShowCandidates(true)
+        setHint(response.data)
     }
 
     return (
@@ -42,7 +43,7 @@ function Home(props) {
                     <Button className={"w-100"} onClick={getHint}>Get Hint</Button>
                 </Col>
                 <Col xs={12} lg={8}>
-                    <Container><Board {...{board, showCandidates, setBoard}}/></Container>
+                    <Container><Board {...{board, showCandidates, setBoard, hint, setHint}}/></Container>
                 </Col>
                 <Col>Solution hints</Col>
             </Row>

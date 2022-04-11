@@ -11,9 +11,17 @@ function HintDetails(props) {
             </div>
         )
     }
+
+    const renderWrongAnswers = () => {
+        return (
+            <div>Invalid values in cells {props.wrongAnswers.join(", ")}</div>
+        )
+    }
+
     return (
         <>
             {props.hint && renderHint()}
+            {props.wrongAnswers.length !== 0 && renderWrongAnswers()}
         </>
     )
 }

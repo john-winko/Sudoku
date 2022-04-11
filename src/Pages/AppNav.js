@@ -1,5 +1,6 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
 import Login from "../components/Login";
+import {Link} from "react-router-dom";
 
 function AppNav(props) {
 
@@ -12,10 +13,9 @@ function AppNav(props) {
                     style={{maxHeight: '100px'}}
                     navbarScroll
                 >
-                    {/*TODO: implement*/}
-                    <Nav.Link href="#action1">Start new game</Nav.Link>
-                    <Nav.Link href="#action2">Leaderboards</Nav.Link>
-                    {props.user && <Nav.Link href="#action3">Game History</Nav.Link>}
+                    <Nav.Link onClick={props.startNewGame}>Start new game</Nav.Link>
+                    <Nav.Link><Link to={"/"}>Leaderboards</Link></Nav.Link>
+                     {props.user && <Nav.Link><Link to={"/GameHistory/"}>Game History</Link></Nav.Link>}
                 </Nav>
                 <Login user={props.user} setUser={props.setUser}/>
             </Container>

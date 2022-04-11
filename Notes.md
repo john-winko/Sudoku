@@ -13,6 +13,7 @@
 - Verify puzzle doesn't have wrong answers/candidates
 - Page refresh clears logged in user
 - Backend, make html friendly descriptions of solution steps
+- Add signup
 
 # Stretch goals
 - timer based progress

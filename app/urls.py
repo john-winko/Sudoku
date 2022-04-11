@@ -1,14 +1,9 @@
-from django.urls import path
-from . import views
+from rest_framework.routers import DefaultRouter
+from app.views import PuzzleViewSet, UserViewSet
 
 
-urlpatterns = [
-    path('', views.send_the_homepage),
-    path('login/', views.log_in),
-    path('whoami/', views.who_am_i),
-    path('logout/', views.log_out),
+r = DefaultRouter()
+r.register(r'puzzle', PuzzleViewSet, basename='puzzle')
+r.register(r'user', UserViewSet, basename="user")
 
-    path('start_game/', views.start_game),
-    path('get_hint/', views.get_hint),
-    path('test/', views.test)
-]
+urlpatterns = r.urls

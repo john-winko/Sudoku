@@ -12,35 +12,53 @@ function Home(props) {
     const [board, setBoard] = useState(defaultBoard)
     const [showCandidates, setShowCandidates] = useState(false)
     const [hint, setHint] = useState(null)
+    const [wrongAnswers, setWrongAnswers] = useState([])
+
+    const startNewGame = () => {
+        utils.startGame().then((response) => {
+            console.log("Home use effect:", response)
+            setBoard(response.data)
+        })
+    }
 
     useEffect(() => {
-        console.log("user", user)
-        if (user) {
-            utils.startGame().then((response) => {
-                console.log("Home use effect:", response)
-                setBoard(response.data)
-            })
-        }
+        startNewGame()
     }, [user])
 
     const getHint = async () => {
         let response = await utils.getHint(board)
-        setShowCandidates(true)
-        setHint(response.data)
+        // console.log(response)
+        if (response.data.hint) {
+            setShowCandidates(true)
+            setBoard(response.data.newBoard)
+            setHint(response.data.hint)
+        } else if (response.data.wrongAnswers) {
+            // TODO add logic for hint response for wrong answers
+            console.log("wrong answer", response.data.wrongAnswers)
+            setWrongAnswers(response.data.wrongAnswers)
+        }
     }
 
     return (
         <div>
-            <AppNav user={user} setUser={setUser}/>
+            <AppNav user={user} setUser={setUser} startNewGame={startNewGame}/>
             <Row className={"m-2"}>
                 <Col>
-                    <BoardMenu {...{setShowCandidates, getHint, showCandidates}} />
+                    <BoardMenu {...{setShowCandidates, getHint, showCandidates, user}} />
                 </Col>
                 <Col xs={12} lg={8}>
-                    <Container><Board {...{board, showCandidates, setBoard, hint, setHint}}/></Container>
+                    <Container><Board {...{
+                        board,
+                        showCandidates,
+                        setBoard,
+                        hint,
+                        setHint,
+                        wrongAnswers,
+                        setWrongAnswers
+                    }}/></Container>
                 </Col>
                 <Col>
-                    <HintDetails hint={hint}/>
+                    <HintDetails hint={hint} wrongAnswers={wrongAnswers}/>
                 </Col>
             </Row>
         </div>

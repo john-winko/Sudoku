@@ -42,6 +42,7 @@ class SudokuBoard:
             # Hard
             # TODO X-Wing
             # Extreme
+            self.solution = "".join([c.value for c in self.cells])
             solved = True
         return True
 
@@ -66,3 +67,12 @@ class SudokuBoard:
         if solve_hidden_pair(self.cells, solution_step):
             return solution_step[0]
         return []
+
+    # def find_wrong_guesses(self, board_string):
+    #     # TODO maybe move this logic into the constructor to make the solution string
+    #     self.solve()
+    #     wrong_answers = []
+    #     for (index, cell) in enumerate(self.cells):
+    #         if board_string[index] != "0" and board_string[index] != cell.value:
+    #             wrong_answers.append(cell.cell_id)
+    #     return wrong_answers

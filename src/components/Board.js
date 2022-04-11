@@ -18,6 +18,8 @@ function Board(props) {
         for (let element of newboard.cells) {
             if (element.cell_id === selectedCell) {
                 element.value = newval
+                if (props.wrongAnswers.includes(element.cell_id))
+                    props.setWrongAnswers(props.wrongAnswers.filter(e => e !== element.cell_id))
                 break
             }
         }
@@ -74,6 +76,7 @@ function Board(props) {
                           cellClick={cellClick}
                           selectedCell={selectedCell === element.cell_id}
                           hint={props.hint}
+                          wrongAnswer={props.wrongAnswers.includes(element.cell_id)}
 
             />)
         })

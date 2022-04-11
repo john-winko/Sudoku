@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from rest_framework.decorators import api_view
 from rest_framework.viewsets import ModelViewSet
 from .mediator import create_game
-from .models import SudokuBoard, SudokuCell
-from .serializers import SudokuCellSerializer, SudokuBoardSerializer
+from .models import SudokuBoard
+from .serializers import SudokuBoardSerializer
 
 
 class PuzzleViewSet(ModelViewSet):
@@ -12,9 +12,9 @@ class PuzzleViewSet(ModelViewSet):
     serializer_class = SudokuBoardSerializer
 
 
-class CellViewSet(ModelViewSet):
-    queryset = SudokuCell.objects.all()
-    serializer_class = SudokuCellSerializer
+# class CellViewSet(ModelViewSet):
+#     queryset = SudokuCell.objects.all()
+#     serializer_class = SudokuCellSerializer
 
 
 def send_the_homepage(request):

@@ -32,10 +32,15 @@ function Home(props) {
 
     const getHint = async () => {
         let response = await utils.getHint(board)
-        setShowCandidates(true)
-        console.log(response)
-        setBoard(response.data.newBoard)
-        setHint(response.data.hint)
+        // console.log(response)
+        if (response.data.hint) {
+            setShowCandidates(true)
+            setBoard(response.data.newBoard)
+            setHint(response.data.hint)
+        } else if (response.data.wrongAnswers) {
+            // TODO add logic for hint response for wrong answers
+            console.log("wrong answer", response.data)
+        }
     }
 
     return (

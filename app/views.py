@@ -19,8 +19,11 @@ class PuzzleViewSet(ModelViewSet):
 
     @action(detail=True, methods=['post', 'put'])
     def get_hint(self, request, pk=None):
-        # auto generated client side will not have a corresponding pk to puzzles on backend, self.get_object() will throw an error
-        return JsonResponse(process_hint(request.data["boardString"]))
+        board_model = self.get_object()
+        board = request.data["board"]
+        board_string = request.data["boardString"]
+        json_hint = process_hint(board_string, board, board_model)
+        return JsonResponse(json_hint)
 
     @action(detail=False, methods=['post', 'put'])
     def test(self, request, pk=None):

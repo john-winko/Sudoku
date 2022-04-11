@@ -1,19 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from app.models import SudokuBoard
 from django.contrib.auth.models import User
-#
-#
-# class SudokuCellSerializer(ModelSerializer):
-#     class Meta:
-#         model = SudokuCell
-#         fields = "__all__"
-#
-#
-# class SolutionStepSerializer(ModelSerializer):
-#     class Meta:
-#         model = SolutionStep
-#         fields = "__all__"
-#     cell = SudokuCellSerializer()
 
 
 class SudokuBoardSerializer(ModelSerializer):

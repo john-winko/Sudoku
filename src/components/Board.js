@@ -5,7 +5,33 @@ import Cell from "./Cell";
 // props: board, showCandidates
 function Board(props) {
 
-    const [selectedCell, setSelectedCell] = useState("")
+    const [selectedCell, setSelectedCell] = useState(null)
+
+    function handleKeyDown(e) {
+        if (!selectedCell) return
+
+        let newval = '0'
+        if ([1, 2, 3, 4, 5, 6, 7, 8, 9].includes(parseInt(e.key))) {
+            newval = e.key
+        }
+        let newboard = {...props.board}
+        for (let element of newboard.cells) {
+            if (element.cell_id === selectedCell) {
+                element.value = newval
+                break
+            }
+        }
+        props.setBoard(newboard)
+    }
+
+    // only allow edits to solved value via keyboard
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyDown);
+
+        return function cleanup() {
+            document.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [selectedCell])
 
     // TODO need to rename to selection rather than click... can be done either through click or by showing hints
     const cellClick = (data, force = false) => {
@@ -14,7 +40,6 @@ function Board(props) {
             // already selected
             if (props.showCandidates) {
                 // handle candidate clicks
-                // props.removeCandidate(data)
                 let newboard = {...props.board}
                 // TODO: filter/find more elegant way of getting specific cell
                 for (let element of newboard.cells) {
@@ -26,6 +51,7 @@ function Board(props) {
                         } else {
                             element.possibilities.push(value)
                         }
+                        break
                     }
                 }
                 props.setBoard(newboard)

@@ -4,7 +4,6 @@ import classNames from "classnames";
 // props:
 function Cell(props) {
 
-
     const smallLeft = [1, 2, 4, 5, 7, 8]
     const bigLeft = [3, 6]
     const gridCellClass = classNames("gridCell", {

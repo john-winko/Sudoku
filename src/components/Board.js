@@ -1,4 +1,3 @@
-import SudokuCell from "./SudokuCell";
 import '../App.css'
 import {useEffect, useState} from "react";
 import Cell from "./Cell";
@@ -16,6 +15,20 @@ function Board(props) {
             if (props.showCandidates) {
                 // handle candidate clicks
                 // props.removeCandidate(data)
+                let newboard = {...props.board}
+                // TODO: filter/find more elegant way of getting specific cell
+                for (let element of newboard.cells) {
+                    if (element.cell_id === cellID) {
+                        let value = data.substring(3, 4)
+                        // toggle
+                        if (element.possibilities.indexOf(value) > -1) {
+                            element.possibilities = element.possibilities.filter(e => e !== value)
+                        } else {
+                            element.possibilities.push(value)
+                        }
+                    }
+                }
+                props.setBoard(newboard)
             } else {
                 // unclick
                 setSelectedCell(null)

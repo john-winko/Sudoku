@@ -19,7 +19,6 @@ class PuzzleViewSet(ModelViewSet):
 
     @action(detail=True, methods=['post', 'put'])
     def get_hint(self, request, pk=None):
-        # print(request)
         # auto generated client side will not have a corresponding pk to puzzles on backend, self.get_object() will throw an error
         return JsonResponse(process_hint(request.data["boardString"]))
 
@@ -36,7 +35,7 @@ class UserViewSet(ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def login(self, request, pk=None):
-        # TODO check if there is a board in play to carry over
+        # TODO check if there is a board in play to carry over or a previous one to overwrite
         username = request.data['username']
         password = request.data['password']
         user = authenticate(username=username, password=password)

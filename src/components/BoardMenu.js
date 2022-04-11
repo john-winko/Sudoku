@@ -1,6 +1,10 @@
 import {Button} from "react-bootstrap";
+import utils from "../utils/utils";
 
 function BoardMenu(props) {
+    const test = () => {
+        utils.test().then((res)=>console.log("res",res))
+    }
     return (<div>
         <hr/>
         <Button className={"w-100"} onClick={() => props.setShowCandidates(!props.showCandidates)}>
@@ -12,6 +16,8 @@ function BoardMenu(props) {
         <hr/>
         <Button className={"w-100"} onClick={props.getHint}>Get Hint</Button>
         {/*TODO saved games/history*/}
+        <hr/>
+        <Button onClick={test}>Test</Button>
     </div>)
 }
 

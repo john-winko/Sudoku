@@ -31,16 +31,18 @@ const apiPost =  (url, params=null)=>{
     return axios.post(url)
 }
 
-myexports.logOut = async () => await apiPost("/logout/")
-myexports.whoAmI = async () => await apiGet("/whoami/")
-myexports.startGame = async () => await apiGet("/start_game/")
-myexports.test = async () => await apiPost("/test/")
+myexports.logOut = async () => await apiPost("/v1/user/logout/")
+myexports.whoAmI = async () => await apiGet("/v1/user/whoami/")
+myexports.startGame = async () => await apiGet("/v1/puzzle/start_game/")
+myexports.test = async () =>{
+    return await apiPost("/v1/puzzle/test/", {"dummy":"data"})
+}
 
 myexports.getHint = async (board) => {
     let boardString = board.cells.map((element, index)=>{
         return (element.value)
     }).join("")
-    return await apiPost("/get_hint/", {"boardString": boardString})
+    return await apiPost(`/v1/puzzle/get_hint/`, {"boardString": boardString})
 }
 
 export default myexports;

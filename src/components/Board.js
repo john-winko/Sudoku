@@ -1,9 +1,10 @@
 import SudokuCell from "./SudokuCell";
 import '../App.css'
 import {useEffect, useState} from "react";
+import Cell from "./Cell";
 
 // props: board, showCandidates
-function SudokuBoard(props) {
+function Board(props) {
 
     const [selectedCell, setSelectedCell] = useState("")
 
@@ -24,12 +25,12 @@ function SudokuBoard(props) {
     }
 
     const renderBoard = () => {
-        const newBoard = props.board.map((element, index) => {
-            return (<SudokuCell key={index} {...element}
-                                show={props.showCandidates}
+        const newBoard = props.board.cells.map((element, index) => {
+            return (<Cell key={index} {...element}
+                                showCandidates={props.showCandidates}
                                 cellClick={cellClick}
                                 selectedCell={selectedCell === element.cell_id}
-                                hint={props.hint}
+                          setSelectedCell={setSelectedCell}
             />)
         })
 
@@ -45,13 +46,11 @@ function SudokuBoard(props) {
     return (
         <div className={"boardContainer"}>
             <div className={"board"}>
-                {props.hint && console.log(props.hint)}
                 {props.board && renderBoard()}
-                {/*{console.log(props.board)}*/}
             </div>
         </div>
 
     )
 }
 
-export default SudokuBoard;
+export default Board;

@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import utils from "../utils/utils";
 import defaultBoard from "../api/blankBoard";
 import {Button, Col, Container, Row} from "react-bootstrap";
-import PuzzleBoard from "./PuzzleBoard";
+import Board from "../components/Board";
 
 function Home(props) {
     const [user, setUser] = useState(null)
@@ -27,12 +27,13 @@ function Home(props) {
             <AppNav user={user} setUser={setUser}/>
             <Row>
                 <Col>
+                    <br/>
                     <Button onClick={()=>setShowCandidates(!showCandidates)}>
-                        {showCandidates ? "Show" : "Hide"}
+                        {showCandidates ? "Hide " : "Show "}
                         Candidates</Button>
                 </Col>
                 <Col xs={12} md={8}>
-                    <Container><PuzzleBoard {...{board, showCandidates}}/></Container>
+                    <Container><Board {...{board, showCandidates, setBoard}}/></Container>
                 </Col>
                 <Col>Solution hints</Col>
             </Row>

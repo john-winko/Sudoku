@@ -5,11 +5,12 @@
 # Working
 - Generate candidates api call
 - Game History
-- Best design for Navbar and passing info?
 
 
 # Backlog
 - Game saves
+- useNavigate is breaking the app
+- Add footer
 - Page refresh clears logged in user
 - Backend, make html friendly descriptions of solution steps
 - Add signup

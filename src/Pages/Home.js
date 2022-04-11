@@ -8,29 +8,29 @@ import HintDetails from "../components/HintDetails";
 import BoardMenu from "../components/BoardMenu";
 
 function Home(props) {
-    const [user, setUser] = useState(null)
-    const [board, setBoard] = useState(defaultBoard)
+    // const [user, setUser] = useState(null)
+    // const [board, setBoard] = useState(defaultBoard)
     const [showCandidates, setShowCandidates] = useState(false)
     const [hint, setHint] = useState(null)
     const [wrongAnswers, setWrongAnswers] = useState([])
 
-    const startNewGame = () => {
-        utils.startGame().then((response) => {
-            console.log("Home use effect:", response)
-            setBoard(response.data)
-        })
-    }
-
-    useEffect(() => {
-        startNewGame()
-    }, [user])
+    // const startNewGame = () => {
+    //     utils.startGame().then((response) => {
+    //         console.log("Home use effect:", response)
+    //         setBoard(response.data)
+    //     })
+    // }
+    //
+    // useEffect(() => {
+    //     startNewGame()
+    // }, [propsuser])
 
     const getHint = async () => {
-        let response = await utils.getHint(board)
+        let response = await utils.getHint(props.board)
         // console.log(response)
         if (response.data.hint) {
             setShowCandidates(true)
-            setBoard(response.data.newBoard)
+            props.setBoard(response.data.newBoard)
             setHint(response.data.hint)
         } else if (response.data.wrongAnswers) {
             // TODO add logic for hint response for wrong answers
@@ -41,16 +41,13 @@ function Home(props) {
 
     return (
         <div>
-            <AppNav user={user} setUser={setUser} startNewGame={startNewGame}/>
             <Row className={"m-2"}>
                 <Col>
-                    <BoardMenu {...{setShowCandidates, getHint, showCandidates, user}} />
+                    <BoardMenu {...{setShowCandidates, getHint, showCandidates}} user={props.user} />
                 </Col>
                 <Col xs={12} lg={8}>
-                    <Container><Board {...{
-                        board,
+                    <Container><Board board={props.board} setBoard={props.setBoard} {...{
                         showCandidates,
-                        setBoard,
                         hint,
                         setHint,
                         wrongAnswers,

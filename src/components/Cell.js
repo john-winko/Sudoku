@@ -16,7 +16,8 @@ function Cell(props) {
         bTop: smallLeft.includes(props.row),
         bbTop: bigLeft.includes(props.row),
         selectedCell: props.selectedCell,
-        hintCell: isSolveCell && !props.selectedCell
+        hintCell: isSolveCell && !props.selectedCell,
+        wrongAnswer: props.value != '0' && props.wrongAnswer
     })
 
     let handleClick = (e) => {

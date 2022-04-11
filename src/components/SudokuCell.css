@@ -40,6 +40,9 @@
     background-color: yellow;
 }
 
+.wrongAnswer {
+    background-color: orangered;
+}
 .gridCellValue {
     display: flex;
     align-items: center;

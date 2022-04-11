@@ -12,6 +12,7 @@ function Home(props) {
     const [board, setBoard] = useState(defaultBoard)
     const [showCandidates, setShowCandidates] = useState(false)
     const [hint, setHint] = useState(null)
+    const [wrongAnswers, setWrongAnswers] = useState([])
 
     useEffect(() => {
         ///////////////////
@@ -39,7 +40,8 @@ function Home(props) {
             setHint(response.data.hint)
         } else if (response.data.wrongAnswers) {
             // TODO add logic for hint response for wrong answers
-            console.log("wrong answer", response.data)
+            console.log("wrong answer", response.data.wrongAnswers)
+            setWrongAnswers(response.data.wrongAnswers)
         }
     }
 
@@ -51,10 +53,10 @@ function Home(props) {
                     <BoardMenu {...{setShowCandidates, getHint, showCandidates, user}} />
                 </Col>
                 <Col xs={12} lg={8}>
-                    <Container><Board {...{board, showCandidates, setBoard, hint, setHint}}/></Container>
+                    <Container><Board {...{board, showCandidates, setBoard, hint, setHint, wrongAnswers, setWrongAnswers}}/></Container>
                 </Col>
                 <Col>
-                    <HintDetails hint={hint}/>
+                    <HintDetails hint={hint} wrongAnswers={wrongAnswers}/>
                 </Col>
             </Row>
         </div>

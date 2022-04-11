@@ -7,8 +7,6 @@ function Cell(props) {
     const isSolveCell = props.hint && props.hint.solve_cells.includes(props.cell_id)
     const isHintCell = props.hint && props.hint.candidates.includes(props.cell_id)
     const isEliminateCell = props.hint && props.hint.solve_cells.includes(props.cell_id)
-    // if (isSolveCell)
-    //     console.log("solvecel", props.cell_id)
 
     const smallLeft = [1, 2, 4, 5, 7, 8]
     const bigLeft = [3, 6]
@@ -17,9 +15,8 @@ function Cell(props) {
         bbLeft: bigLeft.includes(props.column),
         bTop: smallLeft.includes(props.row),
         bbTop: bigLeft.includes(props.row),
-        // selectedCell: props.selectedCell
-        // TODO Automatically select cell if it is a hint
-        selectedCell: props.showCandidates && (props.selectedCell || isSolveCell)
+        selectedCell: props.selectedCell,
+        hintCell: isSolveCell && !props.selectedCell
     })
 
     let handleClick = (e) => {
@@ -32,9 +29,6 @@ function Cell(props) {
         for (let i = 1; i < 10; i++) {
             let show = props.possibilities && props.possibilities.includes(i.toString())
             let gridCandidateClass = classNames("gridCellCandidate", {
-                // TODO add logic to check for hints
-                // hint: false,
-                // eliminate: false
                 hint: isHintCell && props.hint.values.includes(i.toString()),
                 eliminate: isEliminateCell && props.hint.values.includes(i.toString()),
             })

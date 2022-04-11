@@ -48,8 +48,9 @@ myexports.getHint = async (board) => {
     let boardString = board.cells.map((element, index)=>{
         return (element.value)
     }).join("")
+    console.log(boardString)
     axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
-    const response = await axios.post("/test/", {"boardString": boardString})
+    const response = await axios.post("/get_hint/", {"boardString": boardString})
     return response
 }
 export default myexports;

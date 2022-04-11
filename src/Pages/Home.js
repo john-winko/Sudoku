@@ -2,8 +2,10 @@ import AppNav from "./AppNav";
 import {useEffect, useState} from "react";
 import utils from "../utils/utils";
 import defaultBoard from "../api/blankBoard";
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import Board from "../components/Board";
+import HintDetails from "../components/HintDetails";
+import BoardMenu from "../components/BoardMenu";
 
 function Home(props) {
     const [user, setUser] = useState(null)
@@ -30,22 +32,16 @@ function Home(props) {
     return (
         <div>
             <AppNav user={user} setUser={setUser}/>
-            <Row className={"mt-2 mx-2"}>
+            <Row className={"m-2"}>
                 <Col>
-                    <hr/>
-                    <Button className={"w-100"} onClick={()=>setShowCandidates(!showCandidates)}>
-                        {showCandidates ? "Hide " : "Show "}
-                        Candidates</Button>
-                    <hr/>
-                    {/*TODO: Logged in functionality*/}
-                    <Button className={"w-100"}>Generate candidates</Button>
-                    <hr/>
-                    <Button className={"w-100"} onClick={getHint}>Get Hint</Button>
+                    <BoardMenu {...{setShowCandidates, getHint, showCandidates}} />
                 </Col>
                 <Col xs={12} lg={8}>
                     <Container><Board {...{board, showCandidates, setBoard, hint, setHint}}/></Container>
                 </Col>
-                <Col>Solution hints</Col>
+                <Col>
+                    <HintDetails hint={hint}/>
+                </Col>
             </Row>
         </div>
     )

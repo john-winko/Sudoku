@@ -30,6 +30,9 @@
 .selectedCell{
     background-color: lightgreen;
 }
+.hintCell{
+    background-color: yellow;
+}
 .gridCellValue{
     display: flex;
     align-items: center;

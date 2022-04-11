@@ -3,16 +3,6 @@ import random
 from .Logic.sample_data import boards_dict
 from .models import SudokuBoard as SudokuBoardModel
 from .Logic.SudokuBoard import SudokuBoard
-#
-#
-# def encode_cell(data):
-#     return {
-#         "value": data.value,
-#         "cell_id": data.cell_id,
-#         "row": data.row,
-#         "column": data.column,
-#         "possibilities": data.possibilities
-#     }
 
 
 def create_game(board_string, user=None):

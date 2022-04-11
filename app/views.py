@@ -2,7 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.decorators import api_view
 from rest_framework.viewsets import ModelViewSet
-from .mediator import create_game, get_hint
+from .mediator import create_game, get_hint as get_hint_from_request
 from .models import SudokuBoard
 from .serializers import SudokuBoardSerializer
 
@@ -10,11 +10,6 @@ from .serializers import SudokuBoardSerializer
 class PuzzleViewSet(ModelViewSet):
     queryset = SudokuBoard.objects.all()
     serializer_class = SudokuBoardSerializer
-
-
-# class CellViewSet(ModelViewSet):
-#     queryset = SudokuCell.objects.all()
-#     serializer_class = SudokuCellSerializer
 
 
 def send_the_homepage(request):
@@ -53,17 +48,23 @@ def log_out(request):
     return HttpResponse('Logged you out!')
 
 
-@api_view(['POST', 'GET'])
-def test(request):
-    if 'boardString' in request.data:
-        hint = get_hint(request.data['boardString'])
-        return JsonResponse(hint)
-    return HttpResponse("failed")
-
-
 @api_view(['GET'])
 def start_game(request):
     # TODO add user capture if logged in
     board = create_game(request.GET['board'] if 'board' in request.GET else None, request.user)
     return JsonResponse(SudokuBoardSerializer(board).data)
+
+
+@api_view(['POST', 'GET'])
+def get_hint(request):
+    if 'boardString' in request.data:
+        hint = get_hint_from_request(request.data['boardString'])
+        return JsonResponse(hint)
+    return HttpResponse("failed")
+
+
+@api_view(['POST', 'GET'])
+def test(request):
+    print(request)
+
 

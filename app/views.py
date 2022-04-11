@@ -38,7 +38,6 @@ class UserViewSet(ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def login(self, request, pk=None):
-        # TODO check if there is a board in play to carry over or a previous one to overwrite
         username = request.data['username']
         password = request.data['password']
         user = authenticate(username=username, password=password)

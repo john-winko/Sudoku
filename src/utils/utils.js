@@ -42,7 +42,7 @@ myexports.getHint = async (board) => {
     let boardString = board.cells.map((element, index)=>{
         return (element.value)
     }).join("")
-    return await apiPost(`/v1/puzzle/get_hint/`, {"boardString": boardString})
+    return await apiPost(`/v1/puzzle/${board.id}/get_hint/`, {"boardString": boardString})
 }
 
 export default myexports;

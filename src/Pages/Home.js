@@ -14,19 +14,28 @@ function Home(props) {
     const [hint, setHint] = useState(null)
 
     useEffect(() => {
-        console.log("user", user)
-        if (user) {
-            utils.startGame().then((response) => {
-                console.log("Home use effect:", response)
-                setBoard(response.data)
-            })
-        }
+        ///////////////////
+        // For debugging w/o backend
+        //////////////////
+        // console.log("user", user)
+        // if (user) {
+        //     utils.startGame().then((response) => {
+        //         console.log("Home use effect:", response)
+        //         setBoard(response.data)
+        //     })
+        // }
+        utils.startGame().then((response) => {
+            console.log("Home use effect:", response)
+            setBoard(response.data)
+        })
     }, [user])
 
     const getHint = async () => {
         let response = await utils.getHint(board)
         setShowCandidates(true)
-        setHint(response.data)
+        console.log(response)
+        setBoard(response.data.newBoard)
+        setHint(response.data.hint)
     }
 
     return (
@@ -34,7 +43,7 @@ function Home(props) {
             <AppNav user={user} setUser={setUser}/>
             <Row className={"m-2"}>
                 <Col>
-                    <BoardMenu {...{setShowCandidates, getHint, showCandidates}} />
+                    <BoardMenu {...{setShowCandidates, getHint, showCandidates, user}} />
                 </Col>
                 <Col xs={12} lg={8}>
                     <Container><Board {...{board, showCandidates, setBoard, hint, setHint}}/></Container>

@@ -12,6 +12,7 @@ class SudokuBoardSerializer(ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "last_login"]
+        fields = ["id", "username", "last_login", "boards"]
+    boards = SudokuBoardSerializer(many=True)
 
 

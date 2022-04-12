@@ -21,6 +21,7 @@ function AppNav(props) {
                     style={{maxHeight: '100px'}}
                     navbarScroll
                 >
+                    <Nav>Difficulty</Nav>
                     <Nav.Link onClick={startNewGame}>Start new game</Nav.Link>
                     <Nav.Link><Link to={"/Leaderboard/"} style={linkStyle}>Leaderboards</Link></Nav.Link>
                      {props.user && <Nav.Link><Link to={"/GameHistory/"} style={linkStyle}>Game History</Link></Nav.Link>}

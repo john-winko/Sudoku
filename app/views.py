@@ -32,9 +32,9 @@ class PuzzleViewSet(ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def current_game(self, request, pk=None):
-        user = request.user
-        print(user)
-        return JsonResponse({})
+        # TODO send new board if previous doesn't exist
+        last_board = request.user.boards.last()
+        return JsonResponse(self.serializer_class(last_board).data)
 
 
 class UserViewSet(ModelViewSet):

@@ -21,13 +21,14 @@ function Login(props) {
         axios.post('/v1/user/login/', params)
             .then((response) => {
                 console.log("login data", response.data)
-                props.setUser(response.data.user)
+                props.setUser(response.data)
             })
     }
 
     const showLogin = () => {
         return (
             <Form className="d-flex" onSubmit={handleFormSubmit}>
+                {console.log(props.user)}
                 <FormControl
                     type="search"
                     placeholder="Username"

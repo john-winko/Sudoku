@@ -17,43 +17,49 @@ myexports.getCSRFToken = () => {
     return csrfToken
 }
 
-const apiGet = (url, params=null) =>{
-    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
-        if (params)
-        return axios.get(url, params)
-    return axios.get(url)
-}
-
-const apiPost =  (url, params=null)=>{
+const apiGet = async (url, params = null) => {
     axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
     if (params)
-        return axios.post(url, params)
-    return axios.post(url)
+        return await axios.get(url, params)
+    return await axios.get(url)
+}
+
+const apiPost = async (url, params = null) => {
+    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
+    if (params)
+        return await axios.post(url, params)
+    return await axios.post(url)
 }
 
 myexports.logOut = async () => await apiPost("/v1/user/logout/")
-myexports.whoAmI = async () => await apiGet("/v1/user/whoami/")
+
+myexports.whoAmI = () => {
+    return apiGet("/v1/user/whoami/")
+        .then((res) => res.data.user)
+}
+
 myexports.startGame = async () => await apiGet("/v1/puzzle/start_game/")
-myexports.test = async () =>{
-    return await apiPost("/v1/puzzle/test/", {"dummy":"data"})
+
+myexports.test = () => {
+    return apiGet("/v1/puzzle/current_game/", {"dummy": "data"})
 }
 
 myexports.getHint = async (board) => {
-    let boardString = board.cells.map((element, index)=>{
+    let boardString = board.cells.map((element, index) => {
         return (element.value)
     }).join("")
-    return await apiPost(`/v1/puzzle/${board.id}/get_hint/`, {"boardString": boardString, "board":board})
+    return await apiPost(`/v1/puzzle/${board.id}/get_hint/`, {"boardString": boardString, "board": board})
 }
 
 myexports.getGameHistory = async () => {
     return await apiGet(`/v1/user/game_history/`)
 }
 
-myexports.getGame = async (boardID) =>{
+myexports.getGame = async (boardID) => {
     return await apiGet(`/v1/puzzle/${boardID}`)
 }
 
-myexports.current_game = async () =>{
+myexports.current_game = async () => {
     return await apiGet(`/v1/puzzle/current_game/`)
 }
 

@@ -7,6 +7,7 @@
 - Auto deletes for no progress puzzles
 - Save progress
 - Pull logged in info
+- consolidate async/awaits
 
 
 # Backlog
@@ -15,6 +16,7 @@
 - Backend, make html friendly descriptions of solution steps
 - Add signup
 - Add instructions to hint screen (select cell, keyboard entry etc)
+- Add in difficulties
 
 
 

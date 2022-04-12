@@ -19,19 +19,23 @@ function App() {
             .catch((err) => console.log("error starting game", err))
 
     useEffect(() => {
-        // get game in progress
+        if (user){// get game in progress
+            utils.current_game()
+                .then((res)=>{
+                console.log(res)
+                setBoard(res.data)
+            })
         // create new game if none exists
-        // pull default game if anonymous user
-        startNewGame()
+        }else{// pull default game if anonymous user
+            console.log("starting new game")
+            startNewGame()
+        }
     }, [user])
 
+    // Check if we are already logged in on page refresh
     useEffect(() => {
-        // TODO
-        // see if we are logged in
-        utils.whoAmI().then((res) => {
-            console.log("whoami", res)
-            setUser(res.data.user)
-        })
+        utils.whoAmI()
+            .then((res)=>setUser(res))
     }, [])
 
     return (

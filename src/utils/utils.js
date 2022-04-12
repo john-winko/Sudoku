@@ -53,4 +53,8 @@ myexports.getGame = async (boardID) =>{
     return await apiGet(`/v1/puzzle/${boardID}`)
 }
 
+myexports.current_game = async () =>{
+    return await apiGet(`/v1/puzzle/current_game/`)
+}
+
 export default myexports;

@@ -21,7 +21,7 @@ function Login(props) {
         axios.post('/v1/user/login/', params)
             .then((response) => {
                 console.log("login data", response.data)
-                props.setUser(response.data.username)
+                props.setUser(response.data.user)
             })
     }
 
@@ -51,7 +51,7 @@ function Login(props) {
     const showLogout = () => {
         return (
             <>
-                <span>Welcome {props.user}!</span>
+                <span>Welcome {props.user.username}!</span>
                 <Button className={"ms-2"} variant={"outline-success"} onClick={logout}>Logout</Button>
             </>
         )

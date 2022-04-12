@@ -4,17 +4,19 @@
 
 # Working
 - Generate candidates api call
-- Game History, wire up
+- Auto deletes for no progress puzzles
+- Save progress
+- Pull logged in info
 
 
 # Backlog
-- Game saves
-- useNavigate is breaking the app
 - Add footer
-- Page refresh clears logged in user
+- Page refresh clears logged in user, add check on page load
 - Backend, make html friendly descriptions of solution steps
 - Add signup
-- cleanup created games that weren't used
+- Add instructions to hint screen (select cell, keyboard entry etc)
+
+
 
 # Stretch goals
 - timer based progress

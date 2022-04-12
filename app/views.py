@@ -30,6 +30,12 @@ class PuzzleViewSet(ModelViewSet):
         print(request)
         return HttpResponse("tested")
 
+    @action(detail=False, methods=['get'])
+    def current_game(self, request, pk=None):
+        user = request.user
+        print(user)
+        return JsonResponse({})
+
 
 class UserViewSet(ModelViewSet):
     # TODO should we add decorate to limit to post/put? get too much of a vulnerability?
@@ -49,7 +55,7 @@ class UserViewSet(ModelViewSet):
                 print(str(e))
             # Don't send everything from user, only what app needs to use for state
             # return HttpResponse('success!')
-            return JsonResponse({"username": user.username})
+            return JsonResponse({"user": self.serializer_class(user).data})
         else:
             return HttpResponse('no user!')
 
@@ -61,7 +67,7 @@ class UserViewSet(ModelViewSet):
     @action(detail=False, methods=['get'])
     def whoami(self, request, pk=None):
         if request.user.is_authenticated:
-            return JsonResponse({"user": request.user.username})
+            return JsonResponse({"user": self.serializer_class(request.user).data})
         return JsonResponse({"user": None})
 
     @action(detail=False, methods=['get'])

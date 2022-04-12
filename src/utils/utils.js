@@ -45,4 +45,12 @@ myexports.getHint = async (board) => {
     return await apiPost(`/v1/puzzle/${board.id}/get_hint/`, {"boardString": boardString, "board":board})
 }
 
+myexports.getGameHistory = async () => {
+    return await apiGet(`/v1/user/game_history/`)
+}
+
+myexports.getGame = async (boardID) =>{
+    return await apiGet(`/v1/puzzle/${boardID}`)
+}
+
 export default myexports;

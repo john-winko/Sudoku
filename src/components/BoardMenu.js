@@ -3,7 +3,7 @@ import utils from "../utils/utils";
 
 function BoardMenu(props) {
     const test = () => {
-        utils.test().then((res) => console.log("res", res))
+        utils.getGame(4).then((res)=>console.log("res", res))
     }
     const loggedInButtons = () => {
         return (

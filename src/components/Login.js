@@ -43,6 +43,7 @@ function Login(props) {
                     name={"password"}
                 />
                 <Button variant="outline-success" type={"submit"}>Login</Button>
+                <Button variant="outline-success" type={"button"}>Sign up</Button>
             </Form>
         )
     }

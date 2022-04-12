@@ -1,33 +1,18 @@
-import AppNav from "./AppNav";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import utils from "../utils/utils";
-import defaultBoard from "../api/blankBoard";
 import {Col, Container, Row} from "react-bootstrap";
 import Board from "../components/Board";
 import HintDetails from "../components/HintDetails";
 import BoardMenu from "../components/BoardMenu";
 
 function Home(props) {
-    // const [user, setUser] = useState(null)
-    // const [board, setBoard] = useState(defaultBoard)
+
     const [showCandidates, setShowCandidates] = useState(false)
     const [hint, setHint] = useState(null)
     const [wrongAnswers, setWrongAnswers] = useState([])
 
-    // const startNewGame = () => {
-    //     utils.startGame().then((response) => {
-    //         console.log("Home use effect:", response)
-    //         setBoard(response.data)
-    //     })
-    // }
-    //
-    // useEffect(() => {
-    //     startNewGame()
-    // }, [propsuser])
-
     const getHint = async () => {
         let response = await utils.getHint(props.board)
-        // console.log(response)
         if (response.data.hint) {
             setShowCandidates(true)
             props.setBoard(response.data.newBoard)

@@ -4,7 +4,7 @@
 
 # Working
 - Generate candidates api call
-- Game History
+- Game History, wire up
 
 
 # Backlog

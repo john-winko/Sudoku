@@ -17,7 +17,7 @@ class PuzzleViewSet(ModelViewSet):
         board = create_game(request.GET['board'] if 'board' in request.GET else None, request.user)
         return JsonResponse(SudokuBoardSerializer(board).data)
 
-    @action(detail=True, methods=['post', 'put'])
+    @action(detail=True, methods=['post'])
     def get_hint(self, request, pk=None):
         board_model = self.get_object()
         board = request.data["board"]
@@ -63,6 +63,18 @@ class UserViewSet(ModelViewSet):
         if request.user.is_authenticated:
             return JsonResponse({"user": request.user.username})
         return JsonResponse({"user": None})
+
+    @action(detail=False, methods=['get'])
+    def game_history(self, request, pk=None):
+        def enc(data):
+            return {
+                "id": data['id'],
+                "board_string": data['board_string'],
+                "hint_used": data['hint_used'],
+                "finished_datetime": data["finished_datetime"]
+            }
+        boards = [enc(c) for c in request.user.boards.values()]
+        return JsonResponse({"boards": boards})
 
 
 def send_the_homepage(request):

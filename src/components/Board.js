@@ -1,11 +1,21 @@
 import '../App.css'
 import {useEffect, useState} from "react";
 import Cell from "./Cell";
+import {useParams} from "react-router-dom";
+import utils from "../utils/utils";
 
 // props: board, showCandidates
 function Board(props) {
-
+    const params = useParams()
     const [selectedCell, setSelectedCell] = useState(null)
+
+    useEffect(()=>{
+        if (params.boardID){
+            utils.getGame(params.boardID)
+                .then((res)=>props.setBoard(res.data))
+            console.log("board changed")
+        }
+    },[params.boardID])
 
     function handleKeyDown(e) {
         if (!selectedCell) return

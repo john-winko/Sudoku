@@ -14,6 +14,10 @@ class PuzzleViewSet(ModelViewSet):
 
     @action(detail=False)
     def start_game(self, request, pk=None):
+        if request.user.is_authenticated:
+            last_board = request.user.boards.last()
+            return JsonResponse(self.serializer_class(last_board).data)
+        # TODO: handle anonymous board creation better
         board = create_game(request.GET['board'] if 'board' in request.GET else None, request.user)
         return JsonResponse(SudokuBoardSerializer(board).data)
 
@@ -32,7 +36,7 @@ class PuzzleViewSet(ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def current_game(self, request, pk=None):
-        # TODO send new board if previous doesn't exist
+        # TODO Superfluous now?
         last_board = request.user.boards.last()
         return JsonResponse(self.serializer_class(last_board).data)
 

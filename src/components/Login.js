@@ -20,15 +20,14 @@ function Login(props) {
         // MUST do this independently to avoid csrf issues with authenticated requests
         axios.post('/v1/user/login/', params)
             .then((response) => {
-                console.log("login data", response.data)
-                props.setUser(response.data)
+                console.log("login data", response.data.user)
+                props.setUser(response.data.user)
             })
     }
 
     const showLogin = () => {
         return (
             <Form className="d-flex" onSubmit={handleFormSubmit}>
-                {console.log(props.user)}
                 <FormControl
                     type="search"
                     placeholder="Username"

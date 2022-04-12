@@ -8,6 +8,7 @@
 - Save progress
 - Pull logged in info
 - consolidate async/awaits
+- refactor start game to pass in boardID (from game history)
 
 
 # Backlog
@@ -17,6 +18,8 @@
 - Add signup
 - Add instructions to hint screen (select cell, keyboard entry etc)
 - Add in difficulties
+- Refactor User model to have a saved board instead of using last board
+- Change start game to go into modal form to select difficulty
 
 
 

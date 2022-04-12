@@ -18,6 +18,7 @@ Django with REST framework backend with React front end. Some features enable fo
     - Pointed Pair
     - Naked Pair
     - Hidden Pair
+- Saves/Loads last board played
 
 ## Development setup
 Clone down repo

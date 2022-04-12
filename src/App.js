@@ -26,7 +26,7 @@ function App() {
                 setBoard(res.data)
             })
         // create new game if none exists
-        }else{// pull default game if anonymous user
+        }else{// pull default game if anonymous user?
             console.log("starting new game")
             startNewGame()
         }

@@ -16,10 +16,10 @@ function Login(props) {
             "password": evt.target.elements.password.value
         }
         // TODO all of a sudden login broke without having this added in
-        axios.defaults.headers.common['X-CSRFToken'] = utils.getCSRFToken()
-        // MUST do this independently to avoid csrf issues with authenticated requests
-        axios.post('/v1/user/login/', params)
-            .then((response) => {
+        // axios.defaults.headers.common['X-CSRFToken'] = utils.getCSRFToken()
+        // // MUST do this independently to avoid csrf issues with authenticated requests
+        // axios.post('/v1/user/login/', params)
+        utils.logIn(params).then((response) => {
                 console.log("login data", response.data.user)
                 props.setUser(response.data.user)
             })

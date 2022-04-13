@@ -1,6 +1,12 @@
 import axios from "axios"
 
 const myexports = {}
+const baseUrl = "http://127.0.0.1:8000"
+
+let instance = axios.create({
+    baseURL: baseUrl,
+    withCredentials: true
+})
 
 myexports.getCSRFToken = () => {
     let csrfToken
@@ -18,18 +24,19 @@ myexports.getCSRFToken = () => {
 }
 
 const apiGet = async (url, params = null) => {
-    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
-    if (params)
-        return await axios.get(url, params)
-    return await axios.get(url)
+    instance.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
+    return await instance.get(url, params)
 }
 
 const apiPost = async (url, params = null) => {
-    axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
-    if (params)
-        return await axios.post(url, params)
-    return await axios.post(url)
+    // axios.defaults.withCredentials = true
+    // axios.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
+    // return await axios.post(baseUrl+url,params)
+    instance.defaults.headers.common['X-CSRFToken'] = myexports.getCSRFToken()
+    return await instance.post(url, params)
 }
+
+myexports.logIn = async (params) => await apiPost('/v1/user/login/', params)
 
 myexports.logOut = async () => await apiPost("/v1/user/logout/")
 
@@ -40,8 +47,14 @@ myexports.whoAmI = () => {
 
 myexports.startGame = async () => await apiGet("/v1/puzzle/start_game/")
 
-myexports.test = () => {
-    return apiGet("/v1/puzzle/current_game/", {"dummy": "data"})
+myexports.test = async () => {
+    let config = {
+      withCredentials: true,
+      headers: {
+        'X-CSRFToken': myexports.getCSRFToken()
+      }
+    }
+    return await axios.post('http://127.0.0.1:8000/v1/user/logout/', null, config)
 }
 
 myexports.getHint = async (board) => {

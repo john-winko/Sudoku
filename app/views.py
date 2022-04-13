@@ -54,7 +54,8 @@ class UserViewSet(ModelViewSet):
         if user is not None:
             try:
                 # access the base request, not DRF request (starts a login session for user)
-                login(request._request, user)
+                login(request, user)
+                # login(request._request, user)
             except Exception as e:
                 print(str(e))
             # Don't send everything from user, only what app needs to use for state

@@ -4,9 +4,7 @@
 
 # Working
 - Generate candidates api call
-- Auto deletes for no progress puzzles
 - Save progress
-- Pull logged in info
 - consolidate async/awaits
 - refactor start game to pass in boardID (from game history)
 

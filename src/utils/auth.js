@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // this base url will be change based on
 // if you need to point to production.
-const BASE_URL = ""// "http://localhost:8000"
+const BASE_URL = "http://localhost:8000"
 const ACCESS_TOKEN = 'access_token'
 const REFRESH_TOKEN = 'refresh_token'
 
@@ -99,6 +99,7 @@ const logoutUser = () => {
     window.localStorage.removeItem(ACCESS_TOKEN);
     window.localStorage.removeItem(REFRESH_TOKEN);
     authRequest.defaults.headers['Authorization'] = "";
+    authRequest.post("/v1/user/logout/")
 }
 
 export {

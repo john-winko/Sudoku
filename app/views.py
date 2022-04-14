@@ -47,22 +47,9 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
 
     @action(detail=False, methods=['post'])
-    def login(self, request, pk=None):
-        username = request.data['username']
-        password = request.data['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            try:
-                # access the base request, not DRF request (starts a login session for user)
-                login(request, user)
-                # login(request._request, user)
-            except Exception as e:
-                print(str(e))
-            # Don't send everything from user, only what app needs to use for state
-            # return HttpResponse('success!')
-            return JsonResponse({"user": WhoAmISerializer(user).data})
-        else:
-            return HttpResponse('no user!')
+    def logout(self, request, pk=None):
+        logout(request)
+        return HttpResponse('Logged you out!')
 
     @action(detail=False, methods=['get'])
     def whoami(self, request, pk=None):

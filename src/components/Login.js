@@ -1,25 +1,30 @@
 import {Button, Form, FormControl} from "react-bootstrap";
 import {loginUser, logoutUser} from "../utils/auth";
 import {whoAmI} from '../utils/utils'
+import {useEffect, useState} from "react";
 
 function Login(props) {
+
+    const [userDetails, setUserDetails] = useState("")
+
+    useEffect(()=>{
+        if (props.user){
+            whoAmI().then((res)=>{
+                setUserDetails(res.data.user)
+            })
+        }
+    },[props.user])
 
     const logout = async () => {
         await logoutUser()
         props.setUser(null)
     }
 
-    const handleFormSubmit = (evt) => {
+    const handleFormSubmit = async (evt) => {
         evt.preventDefault()
         let username = evt.target.elements.username.value
         let password = evt.target.elements.password.value
-        loginUser(username, password).then((result)=>{
-            // we can get a whoami and set from there
-            // props.setUser(username)
-            whoAmI().then((user)=>{
-                props.setUser(user)
-            })
-        })
+        loginUser(username, password).then(()=>props.setUser(username))
 
     }
 
@@ -49,7 +54,7 @@ function Login(props) {
     const showLogout = () => {
         return (
             <>
-                <span>Welcome {props.user.username}!</span>
+                <span>Welcome {props.user}!</span>
                 <Button className={"ms-2"} variant={"outline-success"} onClick={logout}>Logout</Button>
             </>
         )

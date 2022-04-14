@@ -12,7 +12,13 @@ class SudokuBoardSerializer(ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "last_login", "boards"]
+        exclude = ["password"]
+        # fields = ["id", "username", "last_login", "boards"]
     boards = SudokuBoardSerializer(many=True)
 
 
+class WhoAmISerializer(ModelSerializer):
+    # doing specific limited data return
+    class Meta:
+        model = User
+        fields = ["id", "username", "last_login"]

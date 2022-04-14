@@ -1,28 +1,26 @@
-import utils from "../utils/utils";
 import {Button, Form, FormControl} from "react-bootstrap";
-import axios from "axios";
+import {loginUser, logoutUser} from "../utils/auth";
+import {whoAmI} from '../utils/utils'
 
 function Login(props) {
 
     const logout = async () => {
-        await utils.logOut()
+        await logoutUser()
         props.setUser(null)
     }
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault()
-        let params = {
-            "username": evt.target.elements.username.value,
-            "password": evt.target.elements.password.value
-        }
-        // TODO all of a sudden login broke without having this added in
-        // axios.defaults.headers.common['X-CSRFToken'] = utils.getCSRFToken()
-        // // MUST do this independently to avoid csrf issues with authenticated requests
-        // axios.post('/v1/user/login/', params)
-        utils.logIn(params).then((response) => {
-                console.log("login data", response.data.user)
-                props.setUser(response.data.user)
+        let username = evt.target.elements.username.value
+        let password = evt.target.elements.password.value
+        loginUser(username, password).then((result)=>{
+            // we can get a whoami and set from there
+            // props.setUser(username)
+            whoAmI().then((user)=>{
+                props.setUser(user)
             })
+        })
+
     }
 
     const showLogin = () => {

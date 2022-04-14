@@ -1,4 +1,4 @@
-import utils from "../utils/utils";
+import {getGameHistory} from "../utils/utils";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 
@@ -7,7 +7,7 @@ function GameHistory(props) {
     const [history, setHistory] = useState([])
 
     useEffect(() => {
-        utils.getGameHistory().then(res => {
+        getGameHistory().then(res => {
             setHistory(res.data.boards)
         })
     }, [])

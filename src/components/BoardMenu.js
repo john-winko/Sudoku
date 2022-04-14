@@ -1,9 +1,13 @@
 import {Button} from "react-bootstrap";
 import utils from "../utils/utils";
+import {authRequest} from "../utils/auth";
 
 function BoardMenu(props) {
     const test = () => {
-        utils.test().then((res)=>console.log("res", res))
+        // (`/v1/user/game_history/`)
+        authRequest.post("/v1/puzzle/test/").then((res)=>{
+                console.log("test", res)
+            })
     }
     const loggedInButtons = () => {
         return (

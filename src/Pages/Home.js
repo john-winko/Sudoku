@@ -1,5 +1,5 @@
 import {useState} from "react";
-import utils from "../utils/utils";
+import {getHint} from "../utils/utils";
 import {Col, Container, Row} from "react-bootstrap";
 import Board from "../components/Board";
 import HintDetails from "../components/HintDetails";
@@ -12,7 +12,7 @@ function Home(props) {
     const [wrongAnswers, setWrongAnswers] = useState([])
 
     const getHint = async () => {
-        let response = await utils.getHint(props.board)
+        let response = await getHint(props.board)
         if (response.data.hint) {
             setShowCandidates(true)
             props.setBoard(response.data.newBoard)

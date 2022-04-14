@@ -4,7 +4,7 @@ import Home from "./Pages/Home";
 import GameHistory from "./Pages/GameHistory";
 import Leaderboard from "./Pages/Leaderboard";
 import {useEffect, useState} from "react";
-import utils from "./utils/utils";
+import {startGame} from "./utils/utils";
 import defaultBoard from "./api/blankBoard";
 import AppNav from "./Pages/AppNav";
 
@@ -14,28 +14,28 @@ function App() {
     const [board, setBoard] = useState(defaultBoard)
 
     const startNewGame = () =>
-        utils.startGame()
+        startGame()
             .then((response) => setBoard(response.data))
             .catch((err) => console.log("error starting game", err))
 
     useEffect(() => {
-        if (user){// get game in progress
-            utils.current_game()
-                .then((res)=>{
-                console.log(res)
-                setBoard(res.data)
-            })
-        // create new game if none exists
-        }else{// pull default game if anonymous user?
-            console.log("starting new game")
-            startNewGame()
-        }
+        // if (user){// get game in progress
+        //     utils.current_game()
+        //         .then((res)=>{
+        //         console.log(res)
+        //         setBoard(res.data)
+        //     })
+        // // create new game if none exists
+        // }else{// pull default game if anonymous user?
+        //     console.log("starting new game")
+        //     startNewGame()
+        // }
     }, [user])
 
     // Check if we are already logged in on page refresh
     useEffect(() => {
-        utils.whoAmI()
-            .then((res)=>setUser(res))
+        // utils.whoAmI()
+        //     .then((res)=>setUser(res))
     }, [])
 
     return (

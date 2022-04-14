@@ -2,7 +2,7 @@ import '../App.css'
 import {useEffect, useState} from "react";
 import Cell from "./Cell";
 import {useParams} from "react-router-dom";
-import utils from "../utils/utils";
+import {getGame} from "../utils/utils";
 
 // props: board, showCandidates
 function Board(props) {
@@ -11,7 +11,7 @@ function Board(props) {
 
     useEffect(()=>{
         if (params.boardID){
-            utils.getGame(params.boardID)
+            getGame(params.boardID)
                 .then((res)=>props.setBoard(res.data))
             console.log("board changed")
         }

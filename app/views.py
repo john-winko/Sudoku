@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 from .mediator import create_game, process_hint
 from .models import SudokuBoard
-from .serializers import SudokuBoardSerializer, UserSerializer
+from .serializers import SudokuBoardSerializer, UserSerializer, WhoAmISerializer
 
 
 class PuzzleViewSet(ModelViewSet):
@@ -60,19 +60,14 @@ class UserViewSet(ModelViewSet):
                 print(str(e))
             # Don't send everything from user, only what app needs to use for state
             # return HttpResponse('success!')
-            return JsonResponse({"user": self.serializer_class(user).data})
+            return JsonResponse({"user": WhoAmISerializer(user).data})
         else:
             return HttpResponse('no user!')
-
-    @action(detail=False, methods=['post'])
-    def logout(self, request, pk=None):
-        logout(request)
-        return HttpResponse('Logged you out!')
 
     @action(detail=False, methods=['get'])
     def whoami(self, request, pk=None):
         if request.user.is_authenticated:
-            return JsonResponse({"user": self.serializer_class(request.user).data})
+            return JsonResponse({"user": WhoAmISerializer(request.user).data})
         return JsonResponse({"user": None})
 
     @action(detail=False, methods=['get'])
@@ -84,6 +79,7 @@ class UserViewSet(ModelViewSet):
                 "hint_used": data['hint_used'],
                 "finished_datetime": data["finished_datetime"]
             }
+
         boards = [enc(c) for c in request.user.boards.values()]
         return JsonResponse({"boards": boards})
 
@@ -92,3 +88,25 @@ def send_the_homepage(request):
     react_index = open('build/index.html').read()
     return HttpResponse(react_index)
 
+
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.mixins import ListModelMixin
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
+from rest_framework.permissions import IsAuthenticated
+
+
+class PingViewSet(GenericViewSet, ListModelMixin):
+    """
+    Helpful class for internal health checks
+    for when your server deploys. Typical of AWS
+    applications behind ALB which does default 30
+    second ping/health checks.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request, *args, **kwargs):
+        return Response(
+            data={"id": request.GET.get("id")},
+            status=HTTP_200_OK
+        )
